@@ -54,7 +54,6 @@ public class Game : MonoBehaviour {
 		started = true;
 
 		List<OscMessage> bufferCopy = new List<OscMessage>(buffer);
-
 		int frameSize = 128;
 		for (int i = 0; i < (bufferCopy.Count - (frameSize / 2)); i += (frameSize / 2)) {
 			
@@ -63,7 +62,6 @@ public class Game : MonoBehaviour {
 
 			// do nothing
 //			subset = EegData.Filter.Tools.applyWindow(subset);
-
 
 			Complex[] complexSubset = DoubleToComplex(subset);
 
@@ -83,7 +81,7 @@ public class Game : MonoBehaviour {
 		}
 
 		double[] power = GetPowerSpectrum(outputTransform);
-		double[] freqv = GetFrequencyVector(frameSize, 5000);
+		double[] freqv = GetFrequencyVector(frameSize, 128);
 
 		delta = dForPowerRange(1, 3, power, freqv);
 		theta = dForPowerRange(4, 7, power, freqv);
@@ -151,7 +149,11 @@ public class Game : MonoBehaviour {
 	Complex[] DoubleToComplex(OscMessage[] messages) {
 		Complex[] c = new Complex[messages.Length];
 		for (int i = 0; i < c.Length; i++) {
-			c[i] = new Complex(System.Convert.ToDouble(messages[i].Values[0]), 0);
+			double d = (System.Convert.ToDouble(messages[i].Values[0]) +
+						System.Convert.ToDouble(messages[i].Values[1]) +
+						System.Convert.ToDouble(messages[i].Values[2]) +
+						System.Convert.ToDouble(messages[i].Values[3])) / 4.0f;
+			c[i] = new Complex(d, 0);
 		}
 		return c;
 	}

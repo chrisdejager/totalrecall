@@ -10,6 +10,8 @@ public class Graph2 : MonoBehaviour {
 	double[][] values;
 	VectorLine[] lines;
 
+	public GameObject[] cubes;
+
 	void Start () {
 		instance = this;
 
@@ -59,5 +61,11 @@ public class Graph2 : MonoBehaviour {
 		deltaLine.joins = Joins.Fill;
 		deltaLine.Draw();
 		lines[index] = deltaLine;
+
+		GameObject bar = cubes[index];
+		bar.gameObject.transform.localScale = new Vector3(1.0f, (float)(newValue / 500.0f), 1.0f);
+		bar.gameObject.transform.localPosition = new Vector3(bar.gameObject.transform.localPosition.x, 
+		                                                     bar.gameObject.transform.localScale.y / 2.0f - 0.5f, 
+		                                                     bar.gameObject.transform.localPosition.z);
 	}
 }
