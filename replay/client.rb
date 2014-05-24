@@ -20,5 +20,6 @@ File.open('chris.txt',"r").each_line do |line|
 			end
 			break
 		end
+                sleep(0.0001)
 	end
 end
