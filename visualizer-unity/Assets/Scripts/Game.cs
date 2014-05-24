@@ -10,9 +10,14 @@ public class Game : MonoBehaviour {
 	Osc handler;
 
 	List<OscMessage> buffer;
-	int windowSize = 5;
+	int windowSize = 512;
 
 	List<Complex[]> fourierReeksen;
+	double delta;
+	double alpha;
+	double theta;
+	double gamma;
+	double beta;
 
 	void Start () {
 		buffer = new List<OscMessage>();
@@ -37,6 +42,8 @@ public class Game : MonoBehaviour {
 	void Update () {
 		if (buffer.Count >= windowSize) {
 			StartProcessingBufferWindow();
+		} else {
+			Debug.Log(buffer.Count);
 		}
 	}
 
@@ -46,12 +53,12 @@ public class Game : MonoBehaviour {
 			return;
 		started = true;
 
-		Debug.Log("StartProcessingBufferWindow");
+		List<OscMessage> bufferCopy = new List<OscMessage>(buffer);
 
 		int frameSize = 128;
-		for (int i = 0; i < (buffer.Count - (frameSize / 2)); i += (frameSize / 2)) {
-
-			OscMessage[] subset = buffer.GetRange(i, 128).ToArray();
+		for (int i = 0; i < (bufferCopy.Count - (frameSize / 2)); i += (frameSize / 2)) {
+			
+			OscMessage[] subset = bufferCopy.GetRange(i, 128).ToArray();
 //			double[] subset = ch.Skip(i).Take(128).ToArray();
 
 			// do nothing
@@ -60,15 +67,78 @@ public class Game : MonoBehaviour {
 
 			Complex[] complexSubset = DoubleToComplex(subset);
 
-			Debug.Log("before: " + complexSubset[0].SquaredMagnitude);
-
 			AForge.Math.FourierTransform.FFT(complexSubset, FourierTransform.Direction.Backward);
 			fourierReeksen.Add(complexSubset);
-
-			Debug.Log("after: " + complexSubset[0].SquaredMagnitude);
 		}
 
+		Complex[] outputTransform = new Complex[frameSize];    
+		for (int i = 0; i < frameSize; i++)
+		{
+			outputTransform[i] = new Complex(0, 0);
+			for (int r = 0; r < fourierReeksen.Count-1; r++)
+			{
+				outputTransform[i] = Complex.Add(fourierReeksen[r][i], outputTransform[i]);
+			}
+			outputTransform[i] = Complex.Divide(outputTransform[i], fourierReeksen.Count);
+		}
+
+		double[] power = GetPowerSpectrum(outputTransform);
+//		double[] freqv = GetFrequencyVector(frameSize, 128);
+
+		delta = dForPowerRange(1, 3, power);
+		theta = dForPowerRange(4, 7, power);
+		alpha = dForPowerRange(8, 12, power);
+		beta = dForPowerRange(13, 30, power);
+		gamma = dForPowerRange(31, 50, power);
+
+		Graph2.instance.UpdateLines(delta, alpha, theta, gamma, beta);
+
+		fourierReeksen.Clear();
+		started = false;
+	}
+
+	void OnGUI() {
+		GUI.Label(new Rect(0,0,200, 50), "delta " + delta);
+		GUI.Label(new Rect(0,50,200, 50), "theta " + theta);
+		GUI.Label(new Rect(0,100,200, 50), "alpha " + alpha);
+		GUI.Label(new Rect(0,150,200, 50), "beta " + beta);
+		GUI.Label(new Rect(0,200,200, 50), "gamma " + gamma);
+	}
+
+	public double dForPowerRange(int start, int end, double[] power) {
+
+		double v = 0;
+		for (int i = start; i < end; i++) {
+			v += power[i];
+		}
+
+		return v / System.Convert.ToDouble((end-start)+1);
+	}
+
+	public static double[] GetPowerSpectrum(Complex[] fft)
+	{
+		int n = (int)System.Math.Ceiling((fft.Length + 1) / 2.0);
 		
+		double[] mx = new double[n];
+		mx[0] = fft[0].SquaredMagnitude / fft.Length;
+		
+		for (int i = 1; i < n; i++)
+		{
+			mx[i] = fft[i].SquaredMagnitude * 2.0 / fft.Length;
+		}
+		
+		return mx;
+	}
+
+	public static double[] GetFrequencyVector(int length, int sampleRate)
+	{
+		int numUniquePts = (int)System.Math.Ceiling((length + 1) / 2.0);
+		double[] freq = new double[numUniquePts];
+		for (int i = 0; i < numUniquePts; i++)
+		{
+			freq[i] = (double)i * sampleRate / length;
+		}
+		return freq;
 	}
 
 	Complex[] DoubleToComplex(OscMessage[] messages) {
