@@ -83,13 +83,13 @@ public class Game : MonoBehaviour {
 		}
 
 		double[] power = GetPowerSpectrum(outputTransform);
-//		double[] freqv = GetFrequencyVector(frameSize, 128);
+		double[] freqv = GetFrequencyVector(frameSize, 5000);
 
-		delta = dForPowerRange(1, 3, power);
-		theta = dForPowerRange(4, 7, power);
-		alpha = dForPowerRange(8, 12, power);
-		beta = dForPowerRange(13, 30, power);
-		gamma = dForPowerRange(31, 50, power);
+		delta = dForPowerRange(1, 3, power, freqv);
+		theta = dForPowerRange(4, 7, power, freqv);
+		alpha = dForPowerRange(8, 12, power, freqv);
+		beta = dForPowerRange(13, 30, power, freqv);
+		gamma = dForPowerRange(31, 50, power, freqv);
 
 		Graph2.instance.UpdateLines(delta, alpha, theta, gamma, beta);
 
@@ -104,11 +104,19 @@ public class Game : MonoBehaviour {
 		GUI.Label(new Rect(0,90,200, 50), "gamma " + gamma);
 	}
 
-	public double dForPowerRange(int start, int end, double[] power) {
+	public double dForPowerRange(int start, int end, double[] power, double[] freqv) {
 
 		double v = 0;
-		for (int i = start; i < end; i++) {
+		int i = 0;
+
+		while (freqv[i] < start) {
+			//skip
+			i++;
+		}
+
+		while (freqv[i] < end) {
 			v += power[i];
+			i++;
 		}
 
 		return v / System.Convert.ToDouble((end-start)+1);
