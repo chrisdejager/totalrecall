@@ -6,10 +6,12 @@ using AForge.Math;
 
 public class Game : MonoBehaviour {
 
+	public static Game instance;
+
 	UDPPacketIO udp;
 	Osc handler;
 
-	List<OscMessage> buffer;
+	public List<OscMessage> buffer;
 	int windowSize = 4096;
 
 	List<Complex[]> fourierReeksen;
@@ -20,6 +22,7 @@ public class Game : MonoBehaviour {
 	double beta;
 
 	void Start () {
+		instance = this;
 		buffer = new List<OscMessage>();
 		fourierReeksen = new List<Complex[]>();
 
@@ -44,7 +47,7 @@ public class Game : MonoBehaviour {
 		if (buffer.Count >= windowSize) {
 			StartProcessingBufferWindow();
 		} else {
-			Debug.Log(buffer.Count);
+//			Debug.Log(buffer.Count);
 		}
 	}
 
@@ -111,9 +114,9 @@ public class Game : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Label(new Rect(0,0,200, 50), "(red) theta " + theta);
-		GUI.Label(new Rect(0,30,200, 50), "(green) alpha " + alpha);
-		GUI.Label(new Rect(0,60,200, 50), "(blue) beta " + beta);
+		GUI.Label(new Rect(0,20,200, 50), "(red) theta " + theta);
+		GUI.Label(new Rect(0,50,200, 50), "(green) alpha " + alpha);
+		GUI.Label(new Rect(0,70,200, 50), "(blue) beta " + beta);
 		GUI.Label(new Rect(0,90,200, 50), "(black) gamma " + gamma);
 	}
 
@@ -164,14 +167,16 @@ public class Game : MonoBehaviour {
 	Complex[] DoubleToComplex(OscMessage[] messages) {
 		Complex[] c = new Complex[messages.Length];
 		for (int i = 0; i < c.Length; i++) {
+
+			OscMessage m = messages[i];
 			double d = (
-//				System.Convert.ToDouble(messages[i].Values[0]) +
-						System.Convert.ToDouble(messages[i].Values[1]) +
-						System.Convert.ToDouble(messages[i].Values[2])
-//						System.Convert.ToDouble(messages[i].Values[3])
-				) / 2.0;
-//			d = d / 100.0;
+//						System.Convert.ToDouble(m.Values[0]) +
+						System.Convert.ToDouble(m.Values[1]) +
+						System.Convert.ToDouble(m.Values[2])
+//						System.Convert.ToDouble(m.Values[3])
+			) / 2.0;
 			c[i] = new Complex(d, 0);
+
 		}
 		return c;
 	}

@@ -12,6 +12,8 @@ public class Graph2 : MonoBehaviour {
 
 	public GameObject[] cubes;
 
+	public double[][] recordedBuffer;
+
 	void Start () {
 		instance = this;
 
@@ -24,9 +26,15 @@ public class Graph2 : MonoBehaviour {
 		values[3] = new double[length];
 
 		lines = new VectorLine[4];
+
+		recordedBuffer = new double[600][];
+//		for (int i = 0; i < recordedBuffer.Length; i++) {
+//			recordedBuffer[i] = new double[4] { 0, 0.0, beta, gamma };
+//		}
 	}
 
 	bool shouldRemoveLines = false;
+	public int coz = 0;
 	public void UpdateLines(double delta, double alpha, double theta, double gamma, double beta) {
 
 		DrawLineForIndex(0, theta, Color.red);
@@ -35,6 +43,18 @@ public class Graph2 : MonoBehaviour {
 		DrawLineForIndex(3, gamma, Color.black);
 
 		shouldRemoveLines = true;
+
+//		double[] v = recordedBuffer[index];
+		for (int i = 0; i < recordedBuffer.Length-1; i++) {
+			recordedBuffer[i] = recordedBuffer[i+1];
+		}
+		recordedBuffer[recordedBuffer.Length-1] = new double[4] { theta, alpha, beta, gamma };
+
+		coz += 1;
+	}
+
+	void OnGUI() {
+		GUI.Label(new Rect(0,0,100,20), coz+"");
 	}
 
 	public void DrawLineForIndex(int index, double newValue, Color color) {
@@ -63,7 +83,7 @@ public class Graph2 : MonoBehaviour {
 		lines[index] = deltaLine;
 
 		GameObject bar = cubes[index];
-		bar.gameObject.transform.localScale = new Vector3(1.0f, (float)(newValue / 500.0f), 1.0f);
+		bar.gameObject.transform.localScale = new Vector3(1.0f, (float)(newValue * 3), 1.0f);
 		bar.gameObject.transform.localPosition = new Vector3(bar.gameObject.transform.localPosition.x, 
 		                                                     bar.gameObject.transform.localScale.y / 2.0f - 0.5f, 
 		                                                     bar.gameObject.transform.localPosition.z);
