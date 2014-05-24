@@ -10,7 +10,7 @@ public class Game : MonoBehaviour {
 	Osc handler;
 
 	List<OscMessage> buffer;
-	int windowSize = 512;
+	int windowSize = 4096;
 
 	List<Complex[]> fourierReeksen;
 	double delta;
@@ -29,10 +29,11 @@ public class Game : MonoBehaviour {
 		handler = GetComponent<Osc>();
 		handler.init(udp);
 		handler.SetAddressHandler("/muse/eeg/raw", ListenEvent);
+
 	}
 
 	void ListenEvent(OscMessage message) {
-		buffer.Add(message);
+		buffer.Add(message);	
 
 		if (buffer.Count > windowSize) {
 			buffer.RemoveAt(0);
@@ -54,10 +55,18 @@ public class Game : MonoBehaviour {
 		started = true;
 
 		List<OscMessage> bufferCopy = new List<OscMessage>(buffer);
-		int frameSize = 128;
+		while (bufferCopy.Count > windowSize) {
+			bufferCopy.RemoveAt(0);
+		}
+
+		while(bufferCopy.Count < windowSize) {
+			bufferCopy.Add(bufferCopy[bufferCopy.Count-1]);
+		}
+
+		int frameSize = 1024;
 		for (int i = 0; i < (bufferCopy.Count - (frameSize / 2)); i += (frameSize / 2)) {
 			
-			OscMessage[] subset = bufferCopy.GetRange(i, 128).ToArray();
+			OscMessage[] subset = bufferCopy.GetRange(i, 1024).ToArray();
 //			double[] subset = ch.Skip(i).Take(128).ToArray();
 
 			// do nothing
@@ -81,7 +90,7 @@ public class Game : MonoBehaviour {
 		}
 
 		double[] power = GetPowerSpectrum(outputTransform);
-		double[] freqv = GetFrequencyVector(frameSize, 128);
+		double[] freqv = GetFrequencyVector(frameSize, 5000);
 
 		delta = dForPowerRange(1, 3, power, freqv);
 		theta = dForPowerRange(4, 7, power, freqv);
@@ -96,10 +105,10 @@ public class Game : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Label(new Rect(0,0,200, 50), "theta " + theta);
-		GUI.Label(new Rect(0,30,200, 50), "alpha " + alpha);
-		GUI.Label(new Rect(0,60,200, 50), "beta " + beta);
-		GUI.Label(new Rect(0,90,200, 50), "gamma " + gamma);
+		GUI.Label(new Rect(0,0,200, 50), "(red) theta " + theta);
+		GUI.Label(new Rect(0,30,200, 50), "(green) alpha " + alpha);
+		GUI.Label(new Rect(0,60,200, 50), "(blue) beta " + beta);
+		GUI.Label(new Rect(0,90,200, 50), "(black) gamma " + gamma);
 	}
 
 	public double dForPowerRange(int start, int end, double[] power, double[] freqv) {
@@ -149,10 +158,13 @@ public class Game : MonoBehaviour {
 	Complex[] DoubleToComplex(OscMessage[] messages) {
 		Complex[] c = new Complex[messages.Length];
 		for (int i = 0; i < c.Length; i++) {
-			double d = (System.Convert.ToDouble(messages[i].Values[0]) +
+			double d = (
+//				System.Convert.ToDouble(messages[i].Values[0]) +
 						System.Convert.ToDouble(messages[i].Values[1]) +
-						System.Convert.ToDouble(messages[i].Values[2]) +
-						System.Convert.ToDouble(messages[i].Values[3])) / 4.0f;
+						System.Convert.ToDouble(messages[i].Values[2])
+//						System.Convert.ToDouble(messages[i].Values[3])
+				) / 2.0;
+//			d = d / 100.0;
 			c[i] = new Complex(d, 0);
 		}
 		return c;

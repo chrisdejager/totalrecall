@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{2F75EEBD-840B-B0A9-662A-80F4681C0E7B}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-UnityScript</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\LeanTween\LeanTweenExamples\Scripts\EventListenersScatteredJS.js" />
+     <Compile Include="Assets\LeanTween\LeanTweenExamples\Scripts\ExampleJS.js" />
+     <Compile Include="Assets\LeanTween\LeanTweenExamples\Scripts\ExamplePunchJS.js" />
+     <Compile Include="Assets\LeanTween\LeanTweenExamples\Scripts\MenuExampleJS.js" />
+     <Compile Include="Assets\LeanTween\LeanTweenExamples\Scripts\MenuSimpleJS.js" />
+     <Compile Include="Assets\LeanTween\LeanTweenExamples\Scripts\MoveLocalCurveJS.js" />
+     <Compile Include="Assets\LeanTween\LeanTweenExamples\Scripts\SlideImageIn.js" />
+     <None Include="Assets\VectrosityDemos\Shaders\ParticleZwrite.shader" />
+     <None Include="Assets\Plugins\AForge\AForge.Neuro.xml" />
+     <None Include="Assets\VectrosityDemos\Shaders\Unlit .shader" />
+     <None Include="Assets\Plugins\AForge\AForge.Robotics.Surveyor.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Video.Kinect.xml" />
+     <None Include="Assets\LeanTween\LeanTweenExamples\Shader\2dUnlitWithFade.shader" />
+     <None Include="Assets\VectrosityDemos\Shaders\UnlitAlpha.shader" />
+     <None Include="Assets\Plugins\AForge\AForge.Fuzzy.xml" />
+     <None Include="Assets\LeanTween\LeanTween-ReadMe.txt" />
+     <None Include="Assets\Plugins\AForge\AForge.Imaging.Formats.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Video.FFMPEG.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Video.xml" />
+     <None Include="Assets\Libraries\Vectrosity\Documentation\Vectrosity changelog.txt" />
+     <None Include="Assets\Plugins\AForge\AForge.Controls.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Genetic.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.MachineLearning.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Math.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Robotics.TeRK.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Video.DirectShow.xml" />
+     <None Include="Assets\Libraries\Vectrosity\Documentation\Vectrosity Upgrade Guide.txt" />
+     <None Include="Assets\Plugins\AForge\AForge.Video.Ximea.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Imaging.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Robotics.Lego.xml" />
+     <None Include="Assets\VectrosityDemos\Shaders\DepthMask.shader" />
+     <None Include="Assets\Plugins\AForge\AForge.Video.VFW.xml" />
+     <None Include="Assets\Plugins\AForge\AForge.Vision.xml" />
+     <None Include="Assets\VectrosityDemos\Shaders\SolidColor.shader" />
+ <Reference Include="Assets\Libraries\Vectrosity\Vectrosity">
+ <HintPath>Assets\Libraries\Vectrosity\Vectrosity.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\Buffer">
+ <HintPath>Assets\Plugins\Buffer.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\MathNet.Neodym">
+ <HintPath>Assets\Plugins\MathNet.Neodym.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\MathNet.Numerics">
+ <HintPath>Assets\Plugins\MathNet.Numerics.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\nunit.framework">
+ <HintPath>Assets\Plugins\nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Controls">
+ <HintPath>Assets\Plugins\AForge\AForge.Controls.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.DebuggerVisualizers (2010)">
+ <HintPath>Assets\Plugins\AForge\AForge.DebuggerVisualizers (2010).dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge">
+ <HintPath>Assets\Plugins\AForge\AForge.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Fuzzy">
+ <HintPath>Assets\Plugins\AForge\AForge.Fuzzy.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Genetic">
+ <HintPath>Assets\Plugins\AForge\AForge.Genetic.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Imaging">
+ <HintPath>Assets\Plugins\AForge\AForge.Imaging.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Imaging.Formats">
+ <HintPath>Assets\Plugins\AForge\AForge.Imaging.Formats.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Imaging.IPPrototyper">
+ <HintPath>Assets\Plugins\AForge\AForge.Imaging.IPPrototyper.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.MachineLearning">
+ <HintPath>Assets\Plugins\AForge\AForge.MachineLearning.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Math">
+ <HintPath>Assets\Plugins\AForge\AForge.Math.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Neuro">
+ <HintPath>Assets\Plugins\AForge\AForge.Neuro.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Robotics.Lego">
+ <HintPath>Assets\Plugins\AForge\AForge.Robotics.Lego.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Robotics.Surveyor">
+ <HintPath>Assets\Plugins\AForge\AForge.Robotics.Surveyor.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Robotics.TeRK">
+ <HintPath>Assets\Plugins\AForge\AForge.Robotics.TeRK.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Video.DirectShow">
+ <HintPath>Assets\Plugins\AForge\AForge.Video.DirectShow.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Video">
+ <HintPath>Assets\Plugins\AForge\AForge.Video.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Video.FFMPEG">
+ <HintPath>Assets\Plugins\AForge\AForge.Video.FFMPEG.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Video.Kinect">
+ <HintPath>Assets\Plugins\AForge\AForge.Video.Kinect.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Video.VFW">
+ <HintPath>Assets\Plugins\AForge\AForge.Video.VFW.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Video.Ximea">
+ <HintPath>Assets\Plugins\AForge\AForge.Video.Ximea.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Plugins\AForge\AForge.Vision">
+ <HintPath>Assets\Plugins\AForge\AForge.Vision.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{0D036341-D3F1-067D-CBA4-1F066CEF21EA}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
