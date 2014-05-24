@@ -98,11 +98,10 @@ public class Game : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Label(new Rect(0,0,200, 50), "delta " + delta);
-		GUI.Label(new Rect(0,50,200, 50), "theta " + theta);
-		GUI.Label(new Rect(0,100,200, 50), "alpha " + alpha);
-		GUI.Label(new Rect(0,150,200, 50), "beta " + beta);
-		GUI.Label(new Rect(0,200,200, 50), "gamma " + gamma);
+		GUI.Label(new Rect(0,0,200, 50), "theta " + theta);
+		GUI.Label(new Rect(0,30,200, 50), "alpha " + alpha);
+		GUI.Label(new Rect(0,60,200, 50), "beta " + beta);
+		GUI.Label(new Rect(0,90,200, 50), "gamma " + gamma);
 	}
 
 	public double dForPowerRange(int start, int end, double[] power) {

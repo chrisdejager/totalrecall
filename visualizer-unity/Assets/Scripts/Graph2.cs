@@ -27,9 +27,9 @@ public class Graph2 : MonoBehaviour {
 	bool shouldRemoveLines = false;
 	public void UpdateLines(double delta, double alpha, double theta, double gamma, double beta) {
 
-		DrawLineForIndex(0, alpha, Color.red);
-		DrawLineForIndex(1, beta, Color.green);
-		DrawLineForIndex(2, theta, Color.blue);
+		DrawLineForIndex(0, theta, Color.blue);
+		DrawLineForIndex(1, alpha, Color.red);
+		DrawLineForIndex(2, beta, Color.green);
 		DrawLineForIndex(3, gamma, Color.black);
 
 		shouldRemoveLines = true;
