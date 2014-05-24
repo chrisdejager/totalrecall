@@ -98,6 +98,12 @@ public class Game : MonoBehaviour {
 		beta = dForPowerRange(13, 30, power, freqv);
 		gamma = dForPowerRange(31, 50, power, freqv);
 
+		double totalPower = theta + alpha + beta + gamma;
+		theta /= totalPower;
+		alpha /= totalPower;
+		beta /= totalPower;
+		gamma /= totalPower;
+
 		Graph2.instance.UpdateLines(delta, alpha, theta, gamma, beta);
 
 		fourierReeksen.Clear();
