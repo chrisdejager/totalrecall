@@ -17,7 +17,7 @@ public class Graph2 : MonoBehaviour {
 	void Start () {
 		instance = this;
 
-		int length = Screen.width;
+		int length = 1200;
 
 		values = new double[5][];
 		values[0] = new double[length];
@@ -98,9 +98,7 @@ public class Graph2 : MonoBehaviour {
 
 //	GameObject gparent;
 	public void DrawLineForIndex(int index, double newValue, Color color) {
-		if (keepvalueslevel) {
-			return;
-		}
+
 
 		// shift everything down
 		double[] v = values[index];
@@ -112,9 +110,11 @@ public class Graph2 : MonoBehaviour {
 		values[index] = v;
 
 		Vector3[] deltaPoints = new Vector3[v.Length];
+
+//		float lastX = -8.0f;
 		for (int i = 0; i < v.Length; i++) {
 //			deltaPoints[i] = new Vector3(i/30.0f - 8.0f, (float)v[i] * 8.0f, 0);
-			deltaPoints[i] = new Vector3(i/30.0f - 8.0f, (float)v[i] * 10.0f - 3.5f, 0);
+			deltaPoints[i] = new Vector3(i/60.0f - 10.0f, (float)v[i] * 10.0f - 3.5f, 0);
 		}
 
 		if (shouldRemoveLines)
@@ -129,10 +129,14 @@ public class Graph2 : MonoBehaviour {
 
 //		deltaLine.vectorObject.transform.parent = gparent.transform;
 
-		GameObject bar = cubes[index];
-		bar.gameObject.transform.localScale = new Vector3(1.0f, (float)(newValue * 3), 1.0f);
-		bar.gameObject.transform.localPosition = new Vector3(bar.gameObject.transform.localPosition.x, 
-		                                                     bar.gameObject.transform.localScale.y / 2.0f - 0.5f, 
-		                                                     bar.gameObject.transform.localPosition.z);
+		if (!keepvalueslevel) {
+			GameObject bar = cubes[index];
+			bar.gameObject.transform.localScale = new Vector3(1.0f, (float)(newValue * 3), 1.0f);
+			bar.gameObject.transform.localPosition = new Vector3(bar.gameObject.transform.localPosition.x, 
+			                                                     bar.gameObject.transform.localScale.y / 2.0f - 0.5f, 
+			                                                     bar.gameObject.transform.localPosition.z);
+		}
+
+
 	}
 }
