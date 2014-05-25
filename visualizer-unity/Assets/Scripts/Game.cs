@@ -47,7 +47,7 @@ public class Game : MonoBehaviour {
 		if (buffer.Count >= windowSize) {
 			StartProcessingBufferWindow();
 		} else {
-//			Debug.Log(buffer.Count);
+			Debug.Log(buffer.Count);
 		}
 	}
 
@@ -113,12 +113,12 @@ public class Game : MonoBehaviour {
 		started = false;
 	}
 
-	void OnGUI() {
-		GUI.Label(new Rect(0,20,200, 50), "(red) theta " + theta);
-		GUI.Label(new Rect(0,50,200, 50), "(green) alpha " + alpha);
-		GUI.Label(new Rect(0,70,200, 50), "(blue) beta " + beta);
-		GUI.Label(new Rect(0,90,200, 50), "(black) gamma " + gamma);
-	}
+//	void OnGUI() {
+//		GUI.Label(new Rect(0,30,200, 50), "(red) theta " + theta);
+//		GUI.Label(new Rect(0,50,200, 50), "(green) alpha " + alpha);
+//		GUI.Label(new Rect(0,70,200, 50), "(blue) beta " + beta);
+//		GUI.Label(new Rect(0,90,200, 50), "(black) gamma " + gamma);
+//	}
 
 	public double dForPowerRange(int start, int end, double[] power, double[] freqv) {
 
