@@ -17,7 +17,7 @@ public class Graph2 : MonoBehaviour {
 	void Start () {
 		instance = this;
 
-		int length = 1200;
+		int length = 1400;
 
 		values = new double[5][];
 		values[0] = new double[length];
@@ -113,8 +113,8 @@ public class Graph2 : MonoBehaviour {
 
 //		float lastX = -8.0f;
 		for (int i = 0; i < v.Length; i++) {
-//			deltaPoints[i] = new Vector3(i/30.0f - 8.0f, (float)v[i] * 8.0f, 0);
-			deltaPoints[i] = new Vector3(i/60.0f - 10.0f, (float)v[i] * 10.0f - 3.5f, 0);
+//			deltaPoints[i] = new Vector3(i/30.0f - 8.0f, (float)v[i] * 8.0f, 0);		
+			deltaPoints[i] = new Vector3(i/60.0f - 12.0f, (float)v[i] * 8.0f - 3.5f, 0);
 		}
 
 		if (shouldRemoveLines)
