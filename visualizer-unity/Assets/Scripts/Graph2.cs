@@ -11,6 +11,7 @@ public class Graph2 : MonoBehaviour {
 	VectorLine[] lines;
 
 	public GameObject[] cubes;
+	public AudioSource dynamicAudioSource;
 
 	public double[][] recordedBuffer;
 
@@ -45,11 +46,28 @@ public class Graph2 : MonoBehaviour {
 			new Vector3(8.0f, - 3.5f, 0), 
 			new Vector3(1.0f, - 3.5f, 0) });
 		l2.Draw3D();
+
+		sources = GetComponents<AudioSource>();
 	}
+
+	AudioSource[] sources;
 
 	bool shouldRemoveLines = false;
 	public int coz = 0;
 	public void UpdateLines(double delta, double alpha, double theta, double gamma, double beta) {
+
+		if (Record.instance.recordedSomething) {
+			float df = (float)( 2 * (alpha - Record.instance.aAlpha));
+			if (Mathf.Abs(df) > 0.8) {
+				df = Mathf.Sign(df);
+			}
+			dynamicAudioSource.pitch = (float)(0.8 * (5 - df) / (4 - df)) ;
+
+			for (int i = 0; i < sources.Length; i++) {
+				if (!sources[i].isPlaying)
+					sources[i].Play();
+			}
+		} 
 
 		DrawLineForIndex(0, theta, new Color(242/255.0f, 24/255.0f, 225/255.0f));
 		DrawLineForIndex(1, alpha, new Color(50/255.0f, 199/255.0f, 109/255.0f));

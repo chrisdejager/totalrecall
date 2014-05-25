@@ -169,6 +169,10 @@ public class Game : MonoBehaviour {
 		for (int i = 0; i < c.Length; i++) {
 
 			OscMessage m = messages[i];
+			if (m == null) {
+				c[i] = new Complex(0,0);
+				continue;
+			}
 			double d = (
 //						System.Convert.ToDouble(m.Values[0]) +
 						System.Convert.ToDouble(m.Values[1]) +

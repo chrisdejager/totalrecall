@@ -5,10 +5,15 @@ using System.Collections.Generic;
 public class Record : MonoBehaviour {
 
 	public GameObject[] recordBalks;
+	public double aAlpha;
+	public static Record instance;
+
+	public bool recordedSomething = false;
 
 	double[] lastRecord;
 
 	void Start () {
+		instance = this;
 		lastRecord = new double[4];
 	}
 
@@ -29,6 +34,8 @@ public class Record : MonoBehaviour {
 		if (renderer.material.color.a < 1.0f) {
 			return;
 		}
+
+
 
 		Debug.Log("attempt fetch recording");
 
@@ -57,6 +64,8 @@ public class Record : MonoBehaviour {
 		lastRecord[2] = avgBeta;
 		lastRecord[3] = avgGamma;
 
+		aAlpha = avgAlpha;
+
 		LeanTween.moveLocal(recordBalks[0], new Vector3(recordBalks[0].transform.localPosition.x,
 		                                                (float)(avgTheta * 3.0f - 0.5f),
 		                                                recordBalks[0].transform.localPosition.z), 1.0f).setEase(LeanTweenType.easeOutElastic);
@@ -75,5 +84,7 @@ public class Record : MonoBehaviour {
 
 
 		Graph2.instance.JumpToValuesForShortPeriod(avgTheta, avgAlpha, avgBeta, avgGamma);
+
+		recordedSomething = true;
 	}
 }
