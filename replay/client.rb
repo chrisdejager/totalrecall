@@ -4,7 +4,7 @@ require 'ruby-osc'
 
 include OSC
 
-client = Client.new 9090
+client = Client.new 3001
 start = Time.now
 
 File.open('chris.txt',"r").each_line do |line|
