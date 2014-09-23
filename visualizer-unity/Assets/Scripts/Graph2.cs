@@ -53,7 +53,6 @@ public class Graph2 : MonoBehaviour {
 	AudioSource[] sources;
 
 	bool shouldRemoveLines = false;
-	public int coz = 0;
 	public void UpdateLines(double delta, double alpha, double theta, double gamma, double beta) {
 
 		if (Record.instance.recordedSomething) {
@@ -81,12 +80,6 @@ public class Graph2 : MonoBehaviour {
 			recordedBuffer[i] = recordedBuffer[i+1];
 		}
 		recordedBuffer[recordedBuffer.Length-1] = new double[4] { theta, alpha, beta, gamma };
-
-		coz += 1;
-	}
-
-	void OnGUI() {
-		GUI.Label(new Rect(0,0,100,20), coz+"");
 	}
 
 	bool keepvalueslevel = false;
@@ -117,7 +110,7 @@ public class Graph2 : MonoBehaviour {
 //	GameObject gparent;
 	public void DrawLineForIndex(int index, double newValue, Color color) {
 
-
+/*
 		// shift everything down
 		double[] v = values[index];
 		for (int i = 0; i < v.Length-1; i++) {
@@ -144,7 +137,7 @@ public class Graph2 : MonoBehaviour {
 		deltaLine.joins = Joins.Fill;
 		deltaLine.Draw3D();
 		lines[index] = deltaLine;
-
+*/
 //		deltaLine.vectorObject.transform.parent = gparent.transform;
 
 		if (!keepvalueslevel) {

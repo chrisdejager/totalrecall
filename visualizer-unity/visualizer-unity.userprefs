@@ -1,8 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../magic-unity/Assets/Scripts/Connection.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Game.cs">
     <Files>
-      <File FileName="../../magic-unity/Assets/Scripts/Connection.cs" Line="14" Column="3" />
+      <File FileName="Assets\Record.cs" Line="51" Column="31" />
+      <File FileName="Assets\Scripts\Game.cs" Line="70" Column="1" />
+      <File FileName="Assets\Scripts\Graph.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graph2.cs" Line="113" Column="3" />
+      <File FileName="Assets\Scripts\Graph3.cs" Line="33" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

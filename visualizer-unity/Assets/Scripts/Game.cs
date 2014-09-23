@@ -12,8 +12,13 @@ public class Game : MonoBehaviour {
 	Osc handler;
 
 	public List<OscMessage> buffer;
-	int windowSize = 4096;
+	static int windowSize = 4096;
+	public int coz = windowSize;
 
+	void OnGUI() {
+		GUI.Label(new Rect(0,0,100,20), coz+"");
+	}
+	
 	List<Complex[]> fourierReeksen;
 	double delta;
 	double alpha;
@@ -32,22 +37,27 @@ public class Game : MonoBehaviour {
 		handler = GetComponent<Osc>();
 		handler.init(udp);
 		handler.SetAddressHandler("/muse/eeg/raw", ListenEvent);
-
 	}
 
 	void ListenEvent(OscMessage message) {
-		buffer.Add(message);	
+		buffer.Add(message);
 
 		if (buffer.Count > windowSize) {
-			buffer.RemoveAt(0);
+			coz += 1;
+			buffer.RemoveAt (0);
+		} else {
+			coz -= 1;
 		}
 	}
-
+	
 	void Update () {
+		if (buffer.Count > 0) {
+			ProcessSignal(buffer[buffer.Count-1]);
+		}
 		if (buffer.Count >= windowSize) {
 			StartProcessingBufferWindow();
 		} else {
-			Debug.Log(buffer.Count);
+//			Debug.Log(buffer.Count);
 		}
 	}
 
@@ -183,5 +193,12 @@ public class Game : MonoBehaviour {
 
 		}
 		return c;
+	}
+
+	void ProcessSignal(OscMessage message) {
+		if (message != null && Graph3.instance != null) {
+			double signal = (System.Convert.ToDouble(message.Values[1]) + System.Convert.ToDouble(message.Values[1])) / 2.0;
+			Graph3.instance.UpdateLine(signal);
+		}
 	}
 }

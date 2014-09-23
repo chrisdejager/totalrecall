@@ -18,7 +18,7 @@ public class Record : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Graph2.instance.coz > 600) {
+		if (Game.instance.coz > 600) {
 			renderer.material.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 1.0f));
 		} else {
 			renderer.material.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, 0.2f));
